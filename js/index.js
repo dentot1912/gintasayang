@@ -277,15 +277,11 @@ document.addEventListener('DOMContentLoaded', () => {
         polaroidsLoaded = true;
 
         const media = [
-            { type: 'image', src: 'assets/img1.jpeg', label: '🩷' },
-            { type: 'image', src: 'assets/img2.jpeg', label: '🩷' },
-            { type: 'image', src: 'assets/img3.jpeg', label: '🩷' },
-            { type: 'image', src: 'assets/img4.jpeg', label: '🩷' },
-            { type: 'image', src: 'assets/img5.jpeg', label: '🩷' },
-            { type: 'image', src: 'assets/img6.jpeg', label: '🩷' },
-            { type: 'image', src: 'assets/img7.jpeg', label: '🩷' },
-            { type: 'image', src: 'assets/img8.jpeg', label: '🩷' },
-            { type: 'image', src: 'assets/img9.jpeg', label: '🩷' },
+            { type: 'image', src: 'assets/img1.jpeg', label: 'My name on it' },
+            { type: 'image', src: 'assets/img2.jpeg', label: 'winda miaw' },
+            { type: 'image', src: 'assets/img3.jpeg', label: 'The very first pic from windaa' },
+            { type: 'image', src: 'assets/img5.jpeg', label: '🩷🩷' },
+            { type: 'image', src: 'assets/img6.jpeg', label: 'This cute little girl has grown up so much' },
         ];
 
         media.forEach((item, idx) => {
@@ -587,31 +583,81 @@ document.addEventListener('DOMContentLoaded', () => {
         goTo(4);
     });
 
-    /* ─── Music Player ────────────────────────────────────────────────────── */
+    /* ─── YouTube Background Music Player ───────────────────────────────── */
     const musicToggle = document.getElementById('music-toggle');
+    
+    // Ganti ID video YouTube di bawah ini (contoh: 'dQw4w9WgXcQ' atau ID lagu pilihanmu)
+    const YOUTUBE_VIDEO_ID = 'PR81ksiSWM8'; // Default: Lagu instrumen/ulang tahun santai
+
+    let ytPlayer = null;
+    let ytPlayerReady = false;
+    let isMusicPlaying = false;
+
+    // Load YouTube IFrame API
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    window.onYouTubeIframeAPIReady = () => {
+        ytPlayer = new YT.Player('yt-player', {
+            height: '100',
+            width: '100',
+            videoId: YOUTUBE_VIDEO_ID,
+            playerVars: {
+                autoplay: 0,
+                controls: 0,
+                loop: 1,
+                playlist: YOUTUBE_VIDEO_ID, // Required for loop to work
+                playsinline: 1,
+                rel: 0
+            },
+            events: {
+                onReady: (event) => {
+                    ytPlayerReady = true;
+                    event.target.setVolume(50);
+                },
+                onStateChange: (event) => {
+                    if (event.data === YT.PlayerState.PLAYING) {
+                        isMusicPlaying = true;
+                        musicToggle?.classList.add('playing');
+                        musicToggle?.classList.add('visible');
+                        if (musicToggle) musicToggle.textContent = '🎵';
+                    } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+                        isMusicPlaying = false;
+                        musicToggle?.classList.remove('playing');
+                        if (musicToggle) musicToggle.textContent = '🔇';
+                    }
+                }
+            }
+        });
+    };
 
     const playMusic = () => {
-        if (!state.audio) return;
-        state.audio.volume = 0.5;
-        state.audio.play()
-            .then(() => {
-                musicToggle?.classList.add('playing');
-                musicToggle?.classList.add('visible');
-                if (musicToggle) musicToggle.textContent = '🎵';
-            })
-            .catch(() => { });
+        if (!ytPlayerReady || !ytPlayer) return;
+        try {
+            ytPlayer.playVideo();
+            isMusicPlaying = true;
+            musicToggle?.classList.add('playing');
+            musicToggle?.classList.add('visible');
+            if (musicToggle) musicToggle.textContent = '🎵';
+        } catch (e) {
+            console.error('Error playing YouTube music:', e);
+        }
     };
 
     const toggleMusic = () => {
-        if (!state.audio) return;
-        if (state.audio.paused) {
-            state.audio.play();
-            musicToggle?.classList.add('playing');
-            if (musicToggle) musicToggle.textContent = '🎵';
-        } else {
-            state.audio.pause();
+        if (!ytPlayerReady || !ytPlayer) return;
+        if (isMusicPlaying) {
+            ytPlayer.pauseVideo();
+            isMusicPlaying = false;
             musicToggle?.classList.remove('playing');
             if (musicToggle) musicToggle.textContent = '🔇';
+        } else {
+            ytPlayer.playVideo();
+            isMusicPlaying = true;
+            musicToggle?.classList.add('playing');
+            if (musicToggle) musicToggle.textContent = '🎵';
         }
     };
 
