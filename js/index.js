@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
         polaroidsLoaded = true;
 
         const media = [
-            { type: 'image', src: 'assets/img1.jpeg', label: 'My name on it' },
+            { type: 'image', src: 'assets/img1.jpeg', label: 'winda cantiik' },
             { type: 'image', src: 'assets/img2.jpeg', label: 'winda miaw' },
             { type: 'image', src: 'assets/img3.jpeg', label: 'The very first pic from windaa' },
             { type: 'image', src: 'assets/img5.jpeg', label: '🩷🩷' },
