@@ -277,11 +277,11 @@ document.addEventListener('DOMContentLoaded', () => {
         polaroidsLoaded = true;
 
         const media = [
-            { type: 'image', src: 'assets/img1.jpeg', label: 'winda cantiik' },
-            { type: 'image', src: 'assets/img2.jpeg', label: 'winda miaw' },
-            { type: 'image', src: 'assets/img3.jpeg', label: 'The very first pic from windaa' },
+            { type: 'image', src: 'assets/img1.jpeg', label: '🩷🩷' },
+            { type: 'image', src: 'assets/img2.jpeg', label: '🩷🩷' },
+            { type: 'image', src: 'assets/img3.jpeg', label: '🩷🩷' },
+            { type: 'image', src: 'assets/img4.jpeg', label: '🩷🩷' },
             { type: 'image', src: 'assets/img5.jpeg', label: '🩷🩷' },
-            { type: 'image', src: 'assets/img6.jpeg', label: 'This cute little girl has grown up so much' },
         ];
 
         media.forEach((item, idx) => {
@@ -326,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!video) return;
 
             if (index === cards.length - 1) {
-                video.play().catch(() => {});
+                video.play().catch(() => { });
             } else {
                 video.pause();
                 video.currentTime = 0;
@@ -413,7 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const idx = Array.from(polaroidStack.children).indexOf(card);
                 const rot = (idx % 2 === 0 ? -1 : 1) * (Math.random() * 4 + 1);
                 card.style.transform = `rotate(${rot}deg) scale(${1 - (polaroidStack.children.length - 1 - idx) * 0.02}) translateY(${(polaroidStack.children.length - 1 - idx) * -5}px)`;
-                
+
                 if (item && item.type === 'image') {
                     openImageModal(item.src, item.label);
                 }
@@ -585,9 +585,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ─── YouTube Background Music Player ───────────────────────────────── */
     const musicToggle = document.getElementById('music-toggle');
-    
+
     // Ganti ID video YouTube di bawah ini (contoh: 'dQw4w9WgXcQ' atau ID lagu pilihanmu)
-    const YOUTUBE_VIDEO_ID = 'PR81ksiSWM8'; // Default: Lagu instrumen/ulang tahun santai
+    const YOUTUBE_VIDEO_ID = 'cMqfTJdbXpY'; // Default: Lagu instrumen/ulang tahun santai
 
     let ytPlayer = null;
     let ytPlayerReady = false;
