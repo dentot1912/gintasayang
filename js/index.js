@@ -805,24 +805,31 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openGift(); }
     });
 
-    // 3D Parallax Tilt Effect on revealed reward photo
+    // Click invitation image to open in full lightbox modal
+    const invitationImageWrap = document.getElementById('invitation-image-wrap');
+    if (invitationImageWrap) {
+        invitationImageWrap.addEventListener('click', () => {
+            openImageModal('assets/hadiah.jpeg', 'Spesial Untuk Kamu 🎁✨');
+        });
+    }
+
+    // 3D Parallax Tilt Effect on revealed reward photo / invitation card
     const setup3DTilt = () => {
+        if (!rewardFrameTilt) return;
         rewardFrameTilt.addEventListener('mousemove', (e) => {
             const rect = rewardFrameTilt.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
 
-            // Calculate tilt percentages (-15deg to 15deg)
-            const rotX = -((y / rect.height) - 0.5) * 30;
-            const rotY = ((x / rect.width) - 0.5) * 30;
+            // Calculate tilt percentages (-10deg to 10deg)
+            const rotX = -((y / rect.height) - 0.5) * 20;
+            const rotY = ((x / rect.width) - 0.5) * 20;
 
-            const card = rewardFrameTilt.querySelector('.reward-frame');
-            card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.06)`;
+            rewardFrameTilt.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.02)`;
         });
 
         rewardFrameTilt.addEventListener('mouseleave', () => {
-            const card = rewardFrameTilt.querySelector('.reward-frame');
-            card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+            rewardFrameTilt.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
         });
     };
 

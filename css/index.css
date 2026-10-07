@@ -1335,47 +1335,159 @@ body {
     gap: clamp(0.5rem, 2vw, 0.8rem);
 }
 
-/* Bouquet wrapper */
-.bouquet-wrapper {
-    width: min(100%, 340px);
+/* ─── Birthday Invitation Card Style ─── */
+.invitation-card {
+    width: min(100%, 360px);
     margin: 0 auto;
-    filter: drop-shadow(0 18px 40px rgba(192, 57, 43, 0.22)) drop-shadow(0 6px 12px rgba(255, 77, 148, 0.15));
+    background: #ffffff;
+    border-radius: 20px;
+    padding: clamp(1.2rem, 4vw, 1.8rem);
+    border: 2px solid rgba(255, 182, 193, 0.5);
+    box-shadow: 0 20px 50px rgba(255, 105, 180, 0.18), 0 6px 16px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+    animation: bouquetFloat 4s ease-in-out infinite alternate;
 }
 
-.bouquet-svg,
-.gift-reward-img {
+.invitation-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 50%, #ff9a9e 100%);
+}
+
+.invitation-header {
+    text-align: center;
+}
+
+.invitation-badge {
+    display: inline-block;
+    background: #fff0f5;
+    color: #e0245e;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid #ffd1dc;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+.invitation-title {
+    font-family: var(--font-head);
+    font-size: clamp(1.25rem, 3.8vw, 1.6rem);
+    color: var(--quartz-pink);
+    margin: 0.2rem 0;
+    line-height: 1.25;
+}
+
+.invitation-subtitle {
+    font-size: 0.85rem;
+    color: var(--velvet-dark);
+    opacity: 0.7;
+    margin: 0;
+}
+
+.invitation-image-wrap {
+    position: relative;
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #faf5f8;
+    border: 1px solid rgba(255, 182, 193, 0.4);
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.08);
+    cursor: zoom-in;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.invitation-image-wrap:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.2);
+}
+
+.invitation-img {
     width: 100%;
     height: auto;
+    max-height: 280px;
+    object-fit: contain;
+    background-color: #fff8fa;
     display: block;
-    border-radius: 16px;
-    object-fit: cover;
-    animation: bouquetFloat 3.5s ease-in-out infinite alternate;
+    transition: transform 0.4s ease;
 }
 
-@keyframes bouquetFloat {
-    0% {
-        transform: translateY(0px) rotate(-0.8deg);
-    }
-
-    100% {
-        transform: translateY(-10px) rotate(0.8deg);
-    }
+.invitation-image-wrap:hover .invitation-img {
+    transform: scale(1.03);
 }
 
-.gift-msg-icon {
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-    animation: pulseScale 1.2s ease-in-out infinite alternate;
+.invitation-zoom-hint {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(6px);
+    color: #d81b60;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    pointer-events: none;
+    border: 1px solid rgba(255, 182, 193, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
-.gift-msg-text {
+.invitation-details {
+    background: #fff8fa;
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 1px dashed rgba(255, 182, 193, 0.8);
+    text-align: left;
+}
+
+.invitation-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: clamp(0.82rem, 2.5vw, 0.92rem);
+    line-height: 1.4;
+}
+
+.invitation-label {
+    font-weight: 700;
+    color: var(--quartz-pink);
+    white-space: nowrap;
+    min-width: 65px;
+}
+
+.invitation-val {
+    color: var(--velvet-dark);
+    font-weight: 500;
+}
+
+.invitation-footer {
+    text-align: center;
+    border-top: 1px solid rgba(255, 182, 193, 0.3);
+    padding-top: 0.8rem;
+}
+
+.invitation-note {
     font-family: var(--font-hand);
-    font-size: clamp(0.88rem, 2.8vw, 1.3rem);
-    line-height: 1.55;
+    font-size: clamp(1rem, 3.2vw, 1.25rem);
+    line-height: 1.4;
     color: var(--velvet-dark);
     font-weight: 600;
-    max-width: 100%;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    margin-bottom: 0.5rem;
 }
 
 .gift-msg-sign {
